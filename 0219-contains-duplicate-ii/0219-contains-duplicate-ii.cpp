@@ -5,13 +5,9 @@ public:
         for(int i=0;i<nums.size();i++){
             if(map.count(nums[i])>0){
                 if(i-map[nums[i]]<=k) return true;
-                else{
-                    map[nums[i]] = i;
-                }
             }
-            else{
-                map[nums[i]] = i;
-            }
+            
+            map[nums[i]] = i;
         }
         return false;
     }
