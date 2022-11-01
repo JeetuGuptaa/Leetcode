@@ -2,7 +2,7 @@ class Solution {
 public:
     
     int check(vector<vector<int>>& grid, int row, int col){
-        if(col>=grid[0].size()) return -1;
+        if(col>=grid[0].size() || col<0) return -1;
         if(row>=grid.size()) return col;
         
         if(grid[row][col]==-1){
