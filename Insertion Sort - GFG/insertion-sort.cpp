@@ -20,14 +20,12 @@ class Solution
     void insert(int arr[], int i)
     {
        int j = i;
-       int key = i+1;
-       while(j>=0 && arr[j]>arr[key]){
-           int temp = arr[j];
-           arr[j] = arr[key];
-           arr[key] = temp;
+       int key = arr[i+1];
+       while(j>=0 && arr[j]>key){
+           arr[j+1] = arr[j];
            j--;
-           key--;
        }
+       arr[j+1] = key;
     }
      public:
     //Function to sort the array using insertion sort algorithm.
