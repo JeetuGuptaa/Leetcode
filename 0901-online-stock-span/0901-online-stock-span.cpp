@@ -22,6 +22,9 @@ public:
         
         return count;
     }
+    ~StockSpanner(){
+        delete []a;
+    }
 };
 
 /**
