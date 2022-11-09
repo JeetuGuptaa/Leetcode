@@ -1,30 +1,32 @@
 class StockSpanner {
 public:
-    int *a;
-    int index;
+    vector<pair<int, int>> v;
     StockSpanner() {
-        index = -1;
-        a = new int[100001];
+
     }
     
     int next(int price) {
-        int count = 1;
-        index++;
-        a[index] = price;
-        for(int i=index-1;i>=0;i--){
-            if(a[i]<=a[index]){
-                count++;
+        v.push_back({price, 1});
+        int count = 0;
+        int i = v.size()-1;
+        
+        while(i>=0){
+            if(v[i].first<=v[v.size()-1].first){
+                count+=v[i].second;
+                i = i-v[i].second;
+               
+                continue;
             }
             else{
                 break;
             }
+            i--;
         }
+        v[v.size()-1].second = count;
+        return v[v.size()-1].second;
         
-        return count;
     }
-    ~StockSpanner(){
-        delete []a;
-    }
+   
 };
 
 /**
