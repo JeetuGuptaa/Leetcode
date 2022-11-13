@@ -1,40 +1,63 @@
 class Solution {
 public:
+    
+    void reverse(string &s, int end){
+        int start =0;
+        while(start<end){
+            swap(s[start], s[end]);
+            start++;
+            end--;
+        }
+    }
+    
+     void reverse(string &s,int start, int end){
+        
+        while(start<end){
+            swap(s[start], s[end]);
+            start++;
+            end--;
+        }
+    }
+    
     string reverseWords(string s) {
+        if(s.size()==1) return s;
+        int nextIndex = 0;
+        int startIndex = 0;
+        bool endSpace = true;
         
-        string ans = "";
-        bool end = false;
-        int wordEnd, wordStart;
-        
-        for(int i= s.size()-1;i>=0;i--){
-            if(s[i]!=' ' && end == false){
-                wordEnd = i;
-                end = true;
+        while(startIndex<s.size()){
+            if(s[startIndex]!=' '){
+                s[nextIndex] = s[startIndex];
+                nextIndex++;
+                endSpace = false;
             }
-            else if(s[i]==' ' && end == true){
-                wordStart = i+1;
-                if(ans.size()!=0){
-                    ans+=" ";
-                }
-                while(wordStart<=wordEnd){
-                    ans+=s[wordStart];
-                    wordStart++;
-                }
-                end = false;
+            else if(endSpace == false){
+                s[nextIndex] = ' ';
+                nextIndex++;
+                endSpace = true;
+            }
+            startIndex++;
+        }
+        
+        if(s[nextIndex-1]==' '){
+            nextIndex--;
+        }
+        
+        reverse(s, nextIndex-1);
+       // return s.substr(0, nextIndex);
+        
+        startIndex = 0;
+        //endWord = 0;
+        for(int endWord=0;endWord<nextIndex;endWord++){
+            if(s[endWord]==' '){
+                reverse(s, startIndex, endWord-1);
+                startIndex = endWord+1;
             }
         }
         
-        if(s[0]!=' '){
-            wordStart = 0;
-            if(ans.size()!=0){
-                ans+=" ";
-            }
-            while(wordStart<=wordEnd){
-                ans += s[wordStart];
-                wordStart++;
-            }
-        }
+        reverse(s, startIndex, nextIndex-1);
+        return s.substr(0, nextIndex);
         
-        return ans;
+
     }
 };
