@@ -81,10 +81,11 @@ struct node
 // Should return data of node at given index. The function may
 //  assume that there are at least index+1 nodes in linked list
 int GetNth(struct node* head, int index){
-  while(index>1){
-      head = head->next;
+  node* temp = head;
+  while(temp!=NULL && index>1){
+      temp = temp->next;
       index--;
   }
-  
-  return head->data;
+  if(temp == NULL) return -1;
+  return temp->data;
 }
