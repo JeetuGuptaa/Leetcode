@@ -27,7 +27,7 @@ public:
         sort(stalls.begin(), stalls.end());
         int ans = 0;
         int start = 0;
-        int end = stalls[stalls.size()-1];
+        int end = stalls[stalls.size()-1]-stalls[0];
         
         
         while(start<=end){
