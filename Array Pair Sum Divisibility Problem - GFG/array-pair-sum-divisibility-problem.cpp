@@ -7,14 +7,9 @@ class Solution {
   public:
      bool canPair(vector<int> nums, int k) {
         int n = nums.size();
-        // An odd length array cannot be divided into pairs
         if (n & 1) return false;
 
-        // Create a frequency array to count occurrences
-        // of all remainders when divided by k.
         map<int, int> freq;
-
-        // Count occurrences of all remainders
         for (int i = 0; i < n; i++) freq[nums[i] % k]++;
 
         for (int i = 0; i < n; i++) {
