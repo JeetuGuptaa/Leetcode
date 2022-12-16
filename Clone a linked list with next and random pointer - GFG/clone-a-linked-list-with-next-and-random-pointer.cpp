@@ -23,45 +23,38 @@ class Solution
     public:
     Node *copyList(Node *head)
     {
-        Node* temp = head;
-        Node* newHead = new Node(temp->data);
-        Node* temp2 = newHead;
-        
-        int count = 1;
-        unordered_map<int, Node*> pointer;
-        pointer[count] = temp2;
-        temp->data = count;
-        temp = temp->next;
-        count++;
-        
-        while(temp!=NULL){
-            temp2->next = new Node(temp ->data);
-            temp->data = count;
-            temp = temp->next;
-            temp2 = temp2->next;
-            pointer[count] = temp2;
-            count++;
+        Node* Next = head->next;
+        Node* cur = head;
+        while(cur!=NULL){
+            cur->next = new Node(cur->data);
+            cur->next->next = Next;
+            cur = Next;
+            if(cur != NULL) Next = cur->next;
         }
         
-        temp2 = newHead;
-        temp = head;
-        while(temp!=NULL){
-            if(temp->arb){
-                temp2->arb = pointer[temp->arb->data];
+        cur = head;
+        while(cur!=NULL){
+            if(cur->arb) cur->next->arb = cur->arb->next;
+            
+            cur = cur->next->next;
+        }
+        cur = head;
+        Node* newHead = cur->next;
+        Node* temp = newHead;
+        
+        while(cur!=NULL){
+            cur->next = temp->next;
+            cur = cur->next;
+            if(cur){
+                temp->next = cur->next;
+                temp=temp->next;
             }
-            temp2 = temp2->next;
-            temp= temp->next;
         }
+        temp->next = NULL;
         
-        temp2 = newHead;
-        temp = head;
-        while(temp){
-            temp->data = temp2->data;
-            temp = temp->next;
-            temp2 = temp2->next;
-        }
         
         return newHead;
+        
     }
 
 };
