@@ -12,7 +12,7 @@ class Solution {
         unordered_map<int, int> mod;
         
         for(int i=0;i<n;i++){
-            mod[(arr[i]+k)%k]++;
+            mod[(arr[i])%k]++;
         }
         
         long long ans = 0;
